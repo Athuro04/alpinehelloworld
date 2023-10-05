@@ -20,7 +20,7 @@ pipeline {
             steps {
                script {
                  sh '''
-                    docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 paterne/$IMAGE_NAME:$IMAGE_TAG
+                    docker run --name $IMAGE_NAME -d -p 80:50000 -e PORT=50000 paterne/$IMAGE_NAME:$IMAGE_TAG
                     sleep 5
                  '''
                }
@@ -31,7 +31,7 @@ pipeline {
            steps {
               script {
                 sh '''
-                    curl http://localhost | grep -q "Hello world!"
+                    curl http://127.17.0.1 | grep -q "Hello world!"
                 '''
               }
            }
