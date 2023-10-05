@@ -21,6 +21,8 @@ pipeline {
                script {
                  sh '''
                     docker run --name $IMAGE_NAME -d -p 80:50000 -e PORT=50000 paterne/$IMAGE_NAME:$IMAGE_TAG
+                    docker stop $IMAGE_NAME
+                    docker rm $IMAGE_NAME
                     sleep 5
                  '''
                }
@@ -31,7 +33,7 @@ pipeline {
            steps {
               script {
                 sh '''
-                    curl http://127.17.0.1 | grep -q "Hello world!"
+                    curl http://127.17.0.1:50000 | grep -q "Hello world!"
                 '''
               }
            }
